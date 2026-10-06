@@ -70,7 +70,7 @@
   "url": "https://www.bls.gov/cps/cpsaat11.htm",
   "year": 2025,
   "workforce": {
-   "label": "All employed people",
+   "label": "Total, 16 years and over",
    "employed": 163493000,
    "women": 0.47100000000000003,
    "white": 0.757,
@@ -88,7 +88,7 @@
    "hispanic": 0.092
   },
   "judges": {
-   "label": "Judges, magistrates and other judicial workers",
+   "label": "Judges, magistrates, and other judicial workers",
    "employed": 57000,
    "women": 0.505,
    "white": 0.742,
