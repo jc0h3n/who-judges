@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who Judges</title>
+<meta name="description" content="Who sits on America's courts: the demographics, education and careers of every federal judge since 1789 and every sitting state supreme court justice, compared with the lawyers and people they serve.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1><a href="#" id="home">Who Judges</a></h1>
+      <p class="motto">“The Federal Judiciary is hardly a cross-section of America. Take, for example, this Court, which consists of only nine men and women, all of them successful lawyers who studied at Harvard or Yale Law School.” Justice Antonin Scalia, dissenting in <i>Obergefell v. Hodges</i>, 2015</p>
+    </div>
+    <nav id="tabs" aria-label="Views"></nav>
+  </header>
+  <p class="dek">Who sits on America's courts: every federal judge since 1789 and every sitting state supreme court justice, by gender, race and ethnicity, age, schooling and the careers that led to the bench, set against the lawyers and the public they serve.</p>
+
+  <form class="filters" id="filters" onsubmit="return false">
+    <label data-for="federal trends members">Court <select id="f-level">
+      <option value="all">All Article III courts</option><option value="Supreme Court">Supreme Court</option>
+      <option value="Courts of appeals">Courts of appeals</option><option value="District courts">District courts</option><option value="Other Article III courts">Other (trade, claims, customs)</option>
+    </select></label>
+    <label data-for="federal members">Sitting on <input type="date" id="f-date" min="1789-09-24"></label>
+    <label data-for="federal trends members">Status <select id="f-status">
+      <option value="active">Active judges</option><option value="all">Active and senior</option>
+    </select></label>
+    <label data-for="federal trends members">Appointed by <select id="f-party">
+      <option value="all">Either party</option><option value="Democratic">Democratic presidents</option><option value="Republican">Republican presidents</option>
+    </select></label>
+    <label data-for="federal members">Circuit <select id="f-circuit"></select></label>
+    <label data-for="federal trends members state">Gender <select id="f-gender">
+      <option value="all">All</option><option value="F">Women</option><option value="M">Men</option>
+    </select></label>
+    <label data-for="state">State <select id="f-state"></select></label>
+    <label data-for="state">Selected by <select id="f-selection">
+      <option value="all">Appointment or election</option><option value="Appointed">Appointed first</option><option value="Elected">Elected first</option>
+    </select></label>
+    <label data-for="state">Party <select id="f-sparty">
+      <option value="all">Any</option><option value="Democratic">Democratic</option><option value="Republican">Republican</option><option value="none">None recorded</option>
+    </select></label>
+    <button type="button" class="link reset" id="reset">Reset filters</button>
+  </form>
+
+  <main id="view"><p class="muted">Loading every federal judge since 1789…</p></main>
+
+  <footer>
+    Data: federal judges from the Federal Judicial Center's <a href="https://www.fjc.gov/history/judges">Biographical Directory of Article III Federal Judges</a> (public domain);
+    state supreme court justices from each court's Wikipedia article, with gender from <a href="https://www.wikidata.org">Wikidata</a> (CC0) and race and ethnicity from Wikipedia's categories;
+    population from the <a href="https://www.census.gov/programs-surveys/popest.html">Census Bureau's population estimates</a>; lawyers and judges in the workforce from the
+    <a href="https://www.bls.gov/cps/cpsaat11.htm">Bureau of Labor Statistics</a>; lawyer counts from the <a href="https://www.americanbar.org/news/profile-legal-profession/">American Bar Association</a>.
+    Rebuilt every week. See <a href="#tab=about">About the data</a> for definitions and caveats.
+    <span id="generated"></span>
+  </footer>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

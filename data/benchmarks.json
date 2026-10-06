@@ -1,0 +1,117 @@
+{
+ "population": {
+  "source": "U.S. Census Bureau, Vintage 2025 population estimates (resident population, July 1, 2025)",
+  "url": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2025/national/asrh/nc-est2025-alldata-r-file12.csv",
+  "year": 2025,
+  "all": {
+   "total": 341784857,
+   "women": 0.5092306708017786,
+   "whiteNH": 0.5610742900759936,
+   "black": 0.13531528402383258,
+   "blackAny": 0.15441168301964883,
+   "hispanic": 0.20523181341530294,
+   "asian": 0.06926182806279214,
+   "asianAny": 0.08425361571826455,
+   "native": 0.020616454637134494,
+   "nativeAny": 0.04081714772986563,
+   "pacific": 0.002791557263170381,
+   "multi": 0.04856564198220169
+  },
+  "adults": {
+   "total": 269763509,
+   "women": 0.5146359510025502,
+   "whiteNH": 0.587767487855446,
+   "black": 0.12973230563960375,
+   "blackAny": 0.14281535758047986,
+   "hispanic": 0.18707858667422658,
+   "asian": 0.07082602858639417,
+   "asianAny": 0.08169055214951255,
+   "native": 0.019376657055569367,
+   "nativeAny": 0.03803570037339631,
+   "pacific": 0.002580215547240676,
+   "multi": 0.03808709353643528
+  },
+  "adults25": {
+   "total": 237826650,
+   "women": 0.5181379883204847,
+   "whiteNH": 0.6024083634025035,
+   "black": 0.12717747569500726,
+   "blackAny": 0.1381313700546175,
+   "hispanic": 0.1765047987683466,
+   "asian": 0.07120038481810176,
+   "asianAny": 0.08056972168594226,
+   "native": 0.01850712272993796,
+   "nativeAny": 0.03644305631854126,
+   "pacific": 0.002473478056391073,
+   "multi": 0.03418806933537516
+  },
+  "adultMedianAge": 47,
+  "medianAge": 39,
+  "adultAgeBands": {
+   "18": 0.033338923538394516,
+   "20": 0.08504943491078328,
+   "25": 0.08652899380842499,
+   "30": 0.08608162788985667,
+   "35": 0.08589487542586792,
+   "40": 0.0821078880613167,
+   "45": 0.07545906440592749,
+   "50": 0.07331859699378392,
+   "55": 0.07455752290054916,
+   "60": 0.07813071930347704,
+   "65": 0.07384786427878205,
+   "70": 0.06215329887334762,
+   "75": 0.04804056355895044,
+   "80": 0.029389853466059414,
+   "85": 0.0261007725844788
+  }
+ },
+ "bls": {
+  "source": "U.S. Bureau of Labor Statistics, Current Population Survey, 2025 annual averages, table 11",
+  "url": "https://www.bls.gov/cps/cpsaat11.htm",
+  "year": 2025,
+  "workforce": {
+   "label": "All employed people",
+   "employed": 163493000,
+   "women": 0.47100000000000003,
+   "white": 0.757,
+   "black": 0.127,
+   "asian": 0.075,
+   "hispanic": 0.2
+  },
+  "lawyers": {
+   "label": "Lawyers",
+   "employed": 1146000,
+   "women": 0.429,
+   "white": 0.8590000000000001,
+   "black": 0.059000000000000004,
+   "asian": 0.06,
+   "hispanic": 0.092
+  },
+  "judges": {
+   "label": "Judges, magistrates and other judicial workers",
+   "employed": 57000,
+   "women": 0.505,
+   "white": 0.742,
+   "black": 0.182,
+   "asian": 0.048,
+   "hispanic": 0.131
+  }
+ },
+ "fetched": "2026-10-06",
+ "education": {
+  "source": "U.S. Census Bureau, Current Population Survey, Educational Attainment in the United States: 2024, table 1-1 (people 25 and over)",
+  "url": "https://www2.census.gov/programs-surveys/demo/tables/educational-attainment/2024/cps-detailed-tables/attain01_2024_1.xlsx",
+  "year": 2024,
+  "bachelorsOrMore": 0.3868320278503046,
+  "graduate": 0.14940818102697997,
+  "professional": 0.01397302001740644,
+  "doctoral": 0.022249782419495212
+ },
+ "veterans": {
+  "source": "U.S. Bureau of Labor Statistics, Current Population Survey, 2025 annual averages (series LNU00049526 and LNU00049601)",
+  "url": "https://data.bls.gov/timeseries/LNU00049526",
+  "year": 2025,
+  "adultsShare": 0.06533028509137155,
+  "veterans": 17260000
+ }
+}

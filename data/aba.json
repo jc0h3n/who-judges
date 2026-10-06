@@ -1,0 +1,16 @@
+{
+ "note": "Updated by hand once a year: the ABA blocks automated downloads. Figures are resident active lawyers from the ABA National Lawyer Population Survey, as published in the ABA Profile of the Legal Profession. Shares of lawyers whose race was reported.",
+ "source": "American Bar Association, National Lawyer Population Survey 2025 (published December 2025)",
+ "url": "https://www.americanbar.org/news/profile-legal-profession/",
+ "year": 2025,
+ "lawyers": 1374720,
+ "lawyersPrior": { "year": 2024, "lawyers": 1355963 },
+ "women": 0.4131,
+ "white": 0.7854,
+ "black": 0.0491,
+ "asian": 0.0637,
+ "hispanic": 0.0589,
+ "multiracial": 0.0376,
+ "pacific": 0.0014,
+ "byState": { "NY": 190015, "CA": 181048, "TX": 99867, "IL": 61945 }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "who-judges",
+  "private": true,
+  "description": "Who sits on America's courts: demographics, education and careers of every federal judge since 1789 and every sitting state supreme court justice, compared with the country.",
+  "type": "module",
+  "scripts": {
+    "fetch": "node scripts/fetch.mjs",
+    "build": "node scripts/build.mjs",
+    "data": "node scripts/fetch.mjs && node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
