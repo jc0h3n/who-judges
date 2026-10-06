@@ -51,8 +51,8 @@ const SCHOOL_ALIASES = [
   [/harvard/i, "Harvard"], [/yale/i, "Yale"], [/columbia/i, "Columbia"], [/stanford/i, "Stanford"], [/university of chicago|chicago law/i, "Chicago"],
   [/new york university|nyu/i, "NYU"], [/university of pennsylvania|^penn\b/i, "Pennsylvania"], [/georgetown/i, "Georgetown"],
   [/university of virginia|^virginia$/i, "Virginia"], [/university of michigan|^michigan$/i, "Michigan"], [/duke/i, "Duke"], [/northwestern/i, "Northwestern"],
-  [/cornell/i, "Cornell"], [/university of texas|^texas$|^ut austin/i, "Texas"], [/(uc|university of california),? berkeley|boalt|^berkeley$/i, "UC Berkeley"],
-  [/ucla|university of california,? los angeles/i, "UCLA"], [/hastings|uc law sf/i, "UC Hastings / UC Law SF"], [/george washington/i, "George Washington"],
+  [/cornell/i, "Cornell"], [/university of texas|^texas$|^ut austin/i, "Texas"], [/(uc|university of california)[-, ]+berkeley|boalt|^berkeley$/i, "UC Berkeley"],
+  [/ucla|university of california[-, ]+los angeles/i, "UCLA"], [/hastings|uc law sf/i, "UC Hastings / UC Law SF"], [/george washington/i, "George Washington"],
   [/vanderbilt/i, "Vanderbilt"], [/notre dame/i, "Notre Dame"], [/fordham/i, "Fordham"], [/boston university/i, "Boston University"], [/boston college/i, "Boston College"],
   [/emory/i, "Emory"], [/tulane/i, "Tulane"], [/princeton/i, "Princeton"], [/brown/i, "Brown"], [/dartmouth/i, "Dartmouth"],
   [/samford|cumberland/i, "Samford (Cumberland)"], [/southern methodist|\bsmu\b/i, "SMU"], [/baylor/i, "Baylor"], [/university of florida|^florida$/i, "Florida"],
@@ -80,7 +80,7 @@ const SCHOOL_ALIASES = [
   [/university of louisville|^louisville$/i, "Louisville"], [/university of memphis|^memphis$/i, "Memphis"], [/university of cincinnati|^cincinnati$/i, "Cincinnati"],
   [/case western/i, "Case Western"], [/wayne state/i, "Wayne State"], [/detroit/i, "Detroit Mercy"], [/thomas m\.? cooley/i, "Cooley"],
   [/university of southern california|^usc$/i, "USC"], [/pepperdine/i, "Pepperdine"], [/santa clara/i, "Santa Clara"], [/mcgeorge/i, "McGeorge"],
-  [/uc davis|university of california,? davis/i, "UC Davis"], [/irvine/i, "UC Irvine"], [/san diego/i, "San Diego"], [/golden gate/i, "Golden Gate"],
+  [/uc davis|university of california[-, ]+davis/i, "UC Davis"], [/irvine/i, "UC Irvine"], [/san diego/i, "San Diego"], [/golden gate/i, "Golden Gate"],
   [/university of san francisco/i, "San Francisco"], [/southwestern/i, "Southwestern"], [/new york law school|^nyls$/i, "New York Law School"],
   [/hofstra/i, "Hofstra"], [/cardozo/i, "Cardozo"], [/university at buffalo|suny buffalo|^buffalo$/i, "Buffalo"], [/vermont/i, "Vermont"],
   [/university of illinois|^illinois$/i, "Illinois"], [/john marshall/i, "John Marshall"], [/kent/i, "Chicago-Kent"], [/depaul/i, "DePaul"],
@@ -216,6 +216,15 @@ const justices = stateRaw.justices.map(j => {
 const bench = existsSync("data/benchmarks.json") ? JSON.parse(read("data/benchmarks.json")) : {};
 const aba = JSON.parse(read("data/aba.json"));
 
+// ---- Law schools of all new lawyers (ABA, classes since 2010), named the same way as judges' schools ----------------
+// The ABA writes "MICHIGAN, UNIVERSITY OF"; flip to "University of Michigan" before matching.
+const flip = s => s.replace(/^(.*?),\s*(The )?University of$/i, "University of $1").replace(/^(.*?),\s*(The )?(College|School) of Law$/i, "$1 $3 of Law");
+let lawSchoolShares = null;
+if (bench.lawSchools?.total) {
+  lawSchoolShares = {};
+  for (const [s, n] of Object.entries(bench.lawSchools.graduates)) { const k = schoolName(flip(s)); lawSchoolShares[k] = (lawSchoolShares[k] || 0) + n / bench.lawSchools.total; }
+}
+
 // ---- Output ----------------------------------------------------------------------------------------------
 const schoolList = [...schools.keys()], presList = [...presidents.keys()], courtList = [...courts.keys()];
 const out = {
@@ -233,7 +242,7 @@ const out = {
   // weekly log of state high-court changes since tracking began
   stateChanges: (existsSync("data/state-history.json") ? JSON.parse(read("data/state-history.json")) : []).filter(h => h.joined?.length || h.left?.length).map(h => ({ date: h.date, since: h.since, joined: h.joined, left: h.left })),
   stateTrackedSince: existsSync("data/state-history.json") ? (JSON.parse(read("data/state-history.json"))[0]?.date || null) : null,
-  benchmarks: { ...bench, aba }
+  benchmarks: { ...bench, aba, lawSchools: bench.lawSchools ? { ...bench.lawSchools, graduates: undefined, shares: lawSchoolShares } : null }
 };
 mkdirSync("site/data", { recursive: true });
 writeFileSync("site/data/judges.json", JSON.stringify(out));
@@ -249,4 +258,5 @@ console.log(`active: women ${pct(active, s => J(s).gender === "F")}, Black ${pct
 console.log(`active careers: ${out.careers.map(c => `${c} ${pct(active, s => J(s).careers.includes(c))}`).join(", ")}`);
 console.log(`state justices ${justices.length}: women ${pct(justices, j => j.gender === "F")}, gender known ${pct(justices, j => j.gender)}, Black ${pct(justices, j => j.race.black)}, Hispanic ${pct(justices, j => j.race.hispanic)}, Asian ${pct(justices, j => j.race.asian)}, Native ${pct(justices, j => j.race.native)}, LGBTQ ${pct(justices, j => j.race.lgbtq)}, appointed ${pct(justices, j => j.selection === "Appointed")}, party known ${pct(justices, j => j.party)}`);
 console.log("top law schools (active federal):", Object.entries(active.reduce((m, s) => { const n = schoolList[J(s).lawSchool]; if (n) m[n] = (m[n] || 0) + 1; return m; }, {})).sort((a, b) => b[1] - a[1]).slice(0, 10).map(x => x.join(" ")).join(", "));
+if (lawSchoolShares) console.log("law grad shares:", ["Harvard", "Yale", "Stanford", "Chicago", "Columbia", "NYU", "Pennsylvania", "Virginia", "Michigan", "Duke", "Northwestern", "UC Berkeley", "Cornell", "Georgetown"].map(s => s + " " + ((lawSchoolShares[s] || 0) * 100).toFixed(2)).join(", "));
 console.log("size:", Math.round(JSON.stringify(out).length / 1024), "KB");

@@ -41,16 +41,25 @@ function unzip(buf) {
 const unxml = s => s.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&amp;/g, "&");
 export function readXlsx(buf, sheet = 1) {
   const z = unzip(buf);
-  const shared = [...(z["xl/sharedStrings.xml"]?.toString("utf8") || "").matchAll(/<si>([\s\S]*?)<\/si>/g)]
-    .map(m => unxml([...m[1].matchAll(/<t[^>]*>([\s\S]*?)<\/t>/g)].map(t => t[1]).join("")));
-  const xml = z[`xl/worksheets/sheet${sheet}.xml`].toString("utf8");
+  // Tags may carry a namespace prefix (<x:row>), depending on the program that wrote the file.
+  const T = name => String.raw`<(?:\w+:)?${name}\b`, E = name => String.raw`<\/(?:\w+:)?${name}>`;
+  const rx = (open, close, flags = "g") => new RegExp(`${open}([^>]*)>([\\s\\S]*?)${close}`, flags);
+  const texts = s => [...s.matchAll(rx(T("t"), E("t")))].map(t => t[2]).join("");
+  const shared = [...(z["xl/sharedStrings.xml"]?.toString("utf8") || "").matchAll(rx(T("si"), E("si")))].map(m => unxml(texts(m[2])));
+  const name = z[`xl/worksheets/sheet${sheet}.xml`] ? `xl/worksheets/sheet${sheet}.xml` : Object.keys(z).filter(k => /^xl\/worksheets\/[^/]+\.xml$/.test(k)).sort()[sheet - 1];
+  const xml = z[name].toString("utf8");
+  const cellRe = new RegExp(String.raw`<(?:\w+:)?c\b([^>]*?)(?:\/>|>([\s\S]*?)<\/(?:\w+:)?c>)`, "g");
   const rows = [];
-  for (const r of xml.matchAll(/<row[^>]*>([\s\S]*?)<\/row>/g)) {
+  for (const r of xml.matchAll(rx(T("row"), E("row")))) {
     const row = [];
-    for (const c of r[1].matchAll(/<c r="([A-Z]+)\d+"([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/g)) {
-      const col = [...c[1]].reduce((t, ch) => t * 26 + ch.charCodeAt(0) - 64, 0) - 1;
-      const v = (c[3] || "").match(/<v>([\s\S]*?)<\/v>/)?.[1], inline = (c[3] || "").match(/<t[^>]*>([\s\S]*?)<\/t>/)?.[1];
-      row[col] = /t="s"/.test(c[2]) ? shared[+v] : inline != null ? unxml(inline) : v != null ? (isNaN(+v) ? unxml(v) : +v) : null;
+    for (const c of r[2].matchAll(cellRe)) {
+      const ref = c[1].match(/\br="([A-Z]+)\d+"/);
+      if (!ref) continue;
+      const col = [...ref[1]].reduce((t, ch) => t * 26 + ch.charCodeAt(0) - 64, 0) - 1;
+      const body = c[2] || "";
+      const v = body.match(new RegExp(`${T("v")}[^>]*>([\\s\\S]*?)${E("v")}`))?.[1];
+      const inline = /<(?:\w+:)?is\b/.test(body) ? texts(body) : null;
+      row[col] = /\bt="s"/.test(c[1]) ? shared[+v] : inline != null ? unxml(inline) : v != null ? (isNaN(+v) ? unxml(v) : +v) : null;
     }
     rows.push(row);
   }
@@ -152,4 +161,82 @@ export async function occupations(labels) {
     out[key] = { label, employed: +v[0] * 1000, women: pct(v[1]), white: pct(v[2]), black: pct(v[3]), asian: pct(v[4]), hispanic: pct(v[5]) };
   }
   return out;
+}
+
+// ---- Race, ethnicity and LGBTQ identity from Wikipedia categories ----------------------------------------------------
+// Wikipedia files people under categories such as "African-American United States senators" or "American jurists of
+// Japanese descent". They are incomplete, so every group here is a lower bound, and people with no matching
+// category are "white or not recorded". Hispanic people of any race count as Hispanic, as in Census tables.
+const DESCENT = (list) => new RegExp(`of (${list}) descent`, "i");
+const HISP_DESCENT = DESCENT("Mexican|Cuban|Puerto Rican|Dominican|Salvadoran|Colombian|Guatemalan|Honduran|Venezuelan|Peruvian|Argentine|Nicaraguan|Ecuadorian|Chilean|Panamanian|Costa Rican|Bolivian|Uruguayan|Paraguayan");
+const ASIAN_DESCENT = DESCENT("Asian|Chinese|Japanese|Korean|Filipino|Vietnamese|Indian|Taiwanese|Pakistani|Thai|Cambodian|Hmong|Laotian|Bangladeshi|Sri Lankan|Indonesian|Malaysian|Burmese|Nepalese");
+export function raceFromCategories(cats) {
+  const c = cats.join("\n");
+  const f = {
+    black: /African[- ]American (United States|members|politicians|people|men|women|state legislators|candidates|judges|lawyers|jurists|mayors|military|Christians|Catholics|Baptists|Methodists|Episcopalians|Presbyterians|Muslims|Jews|LGBTQ)|Black (conservatism|British|Canadian)|Afro-(Caribbean|Latin|Cuban|Puerto|Dominican)/i.test(c),
+    hispanic: /Hispanic and Latino American|Latino conservatism|Puerto Rican (people|politicians|lawyers|judges)|Mexican-American|Cuban[- ]American|Chicano/i.test(c) || HISP_DESCENT.test(c),
+    asian: /Asian[- ]American|Asian conservatism|Asian descent/i.test(c) || ASIAN_DESCENT.test(c) || /(Chinese|Japanese|Korean|Filipino|Vietnamese|Indian|Taiwanese) emigrants to the United States/i.test(c),
+    native: /Native American (members|politicians|people|women|men|judges|lawyers|leaders|state legislators|United States)|Alaska Native|Cherokee|Navajo|Choctaw|Chickasaw|Muscogee|Ojibwe|Lakota|Osage|Seminole|Pueblo|Comanche|Kiowa|Lumbee|Ho-Chunk|Iroquois|Mohawk|Oneida|Potawatomi|Cheyenne|Arapaho|Shoshone|Blackfeet|Crow people|Apache|Hopi|Ottawa people|Native Americans? from/i.test(c),
+    pacific: /Native Hawaiian|Pacific Islander|Samoan (American|people)|Chamorro|Tongan American/i.test(c),
+    lgbtq: /\bLGBTQ (members|judges|lawyers|people|appointed|state legislators|politicians|jurists)|^(American )?(gay|lesbian|bisexual) |(gay|lesbian|bisexual) (men|women|politicians|lawyers|judges)/im.test(c) && !/^LGBTQ rights/im.test(c)
+  };
+  const nonWhite = ["black", "asian", "native", "pacific"].filter(k => f[k]);
+  const group = f.hispanic ? "Hispanic" : nonWhite.length > 1 ? "Multiracial"
+    : nonWhite.length ? { black: "Black", asian: "Asian American", native: "Native American", pacific: "Pacific Islander" }[nonWhite[0]] : "White or not recorded";
+  return { group, ...f };
+}
+
+// Visible categories for Wikipedia articles, 50 titles per request. Returns {title: [category, ...]}, keyed by the
+// title as asked (redirects and normalization resolved back to the input).
+export async function wikiCategories(titles, { pause = 600 } = {}) {
+  const out = {};
+  for (let i = 0; i < titles.length; i += 50) {
+    const batch = titles.slice(i, i + 50);
+    let cont = {};
+    do {
+      await sleep(pause);
+      const params = new URLSearchParams({ action: "query", format: "json", formatversion: "2", redirects: "1", prop: "categories",
+        clshow: "!hidden", cllimit: "max", titles: batch.join("|"), ...cont });
+      const j = await (await get(`https://en.wikipedia.org/w/api.php?${params}`)).json();
+      const alias = Object.fromEntries([...(j.query?.normalized || []), ...(j.query?.redirects || [])].map(x => [x.to, x.from]));
+      for (const p of j.query?.pages || []) {
+        let key = p.title; while (alias[key]) key = alias[key];
+        (out[key] ||= []).push(...(p.categories || []).map(c => c.title.replace(/^Category:/, "")));
+      }
+      cont = j.continue || null;
+    } while (cont);
+  }
+  return out;
+}
+
+// ---- Law schools and clerkships (ABA Standard 509 employment outcomes, every class since 2010) -------------------------
+// The ABA's required-disclosures site publishes, for each law school and graduating class, the number of J.D.
+// graduates and how many took federal or state judicial clerkships. Summed over every class available, this gives each
+// school's share of all new lawyers, to set against judges' law schools, and how rare clerkships are.
+export async function lawSchools() {
+  const API = "https://backend.abarequireddisclosures.org/api/";
+  const graduates = {}, years = [];
+  let total = 0, federal = 0, stateLocal = 0;
+  for (let y = new Date().getUTCFullYear(); y >= 2010; y--) {
+    const r = await fetch(`${API}EmploymentOutcomes/GenerateEQCompilationReport?year=${y}`, { headers: { "User-Agent": UA } });
+    if (!r.ok || !/sheet/.test(r.headers.get("content-type") || "")) continue;
+    const rows = readXlsx(Buffer.from(await r.arrayBuffer()));
+    const head = rows[0] || [], col = names => names.map(n => head.indexOf(n)).find(i => i >= 0) ?? -1;
+    // Column names changed in 2024 ("...Total" suffixes); accept both spellings
+    const [cName, cGrad, cFed, cState] = [["SchoolName"], ["Total_GraduatesTotal", "Total_GraduatesNumber"], ["Clerkships_Federal_Total", "Clerkships_Federal"], ["Clerkships_StateLocal_Total", "Clerkships_StateLocal"]].map(col);
+    if ([cName, cGrad, cFed, cState].some(c => c < 0)) continue;
+    let classTotal = 0;
+    for (const row of rows.slice(1)) {
+      const school = row?.[cName], n = +row?.[cGrad];
+      if (!school || !(n > 0)) continue;
+      graduates[school] = (graduates[school] || 0) + n;
+      classTotal += n; federal += +row[cFed] || 0; stateLocal += +row[cState] || 0;
+    }
+    if (classTotal) { total += classTotal; years.push(y); }
+    await sleep(800);
+  }
+  if (!total) throw new Error("no ABA employment summaries found");
+  return { source: `American Bar Association, Standard 509 employment outcomes, J.D. classes of ${Math.min(...years)}–${Math.max(...years)}`,
+    url: "https://www.abarequireddisclosures.org/", years: years.sort(), total, graduates,
+    federalClerkship: federal / total, stateClerkship: stateLocal / total };
 }

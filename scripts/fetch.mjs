@@ -5,7 +5,7 @@
 //   data/benchmarks.json    U.S. population, education and veterans (Census Bureau, BLS) and lawyers and judges (BLS); see benchmarks.mjs
 // The files in data/ are committed. If a source can't be reached, the last good copy is kept and the build still works.
 import { mkdirSync, writeFileSync, readFileSync, existsSync } from "node:fs";
-import { population, education, veterans, occupations, BROWSER } from "./benchmarks.mjs";
+import { population, education, veterans, occupations, lawSchools, BROWSER } from "./benchmarks.mjs";
 
 const UA = "who-judges/1.0 (https://github.com/jc0h3n/who-judges; open-data build script)";
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -241,6 +241,7 @@ const bench = readJSON("data/benchmarks.json") || {};
 await step("Census population", async () => { bench.population = await population(); console.log("Census", bench.population.year); });
 await step("Census education", async () => { bench.education = await education(); console.log("education", bench.education.year); });
 await step("BLS veterans", async () => { bench.veterans = await veterans(); console.log("veterans", bench.veterans.year); });
+await step("ABA law schools", async () => { bench.lawSchools = await lawSchools(); console.log("ABA law schools", bench.lawSchools.years.at(-1)); });
 await step("BLS occupations", async () => {
   bench.bls = await occupations({ workforce: "Total, 16 years and over", lawyers: "Lawyers", judges: "Judges, magistrates, and other judicial workers" });
   console.log("BLS", bench.bls.year);

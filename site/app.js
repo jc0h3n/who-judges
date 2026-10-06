@@ -137,7 +137,7 @@ function federal() {
       ${tile("Median age", ages.length ? Math.round(median(ages)) : "–", `${isToday ? "today" : "on that date"} · U.S. adults ${US.medianAge}`)}
       ${tile("Former prosecutors", fmtPct(share(js, j => j.careers.some(c => /prosecutor/.test(c)))), "federal, state or local")}
       ${tile("Former public defenders", fmtPct(share(js, j => j.careers.includes("Public defender"))), "or legal aid")}
-      ${tile("Harvard or Yale law", fmtPct(share(js, j => j.lawSchool === "Harvard" || j.lawSchool === "Yale")), "first law degree")}
+      ${tile("Harvard or Yale law", fmtPct(share(js, j => j.lawSchool === "Harvard" || j.lawSchool === "Yale")), D.benchmarks.lawSchools ? `first law degree · ${fmtPct((D.benchmarks.lawSchools.shares.Harvard || 0) + (D.benchmarks.lawSchools.shares.Yale || 0))} of new lawyers` : "first law degree")}
     </div>
     <h2 class="section-title">Compared with the country</h2>
     <div class="grid2">${chart("c-vs", "These judges and all U.S. adults", vsNote(), true)}</div>
@@ -340,8 +340,37 @@ function compare() {
   const median = a => { const s = a.filter(x => x != null).sort((x, y) => x - y); return s.length ? s[s.length >> 1] : null; };
   const fedAge = median(fed.map(j => j.born ? yearOf(TODAY) - j.born : null)), stAge = median(ST.map(j => j.born ? yearOf(TODAY) - j.born : null));
   const usPop = pop?.all?.total;
+  const LS = B.lawSchools, gradShare = name => LS?.shares?.[name] || 0;
+  const hyGrads = gradShare("Harvard") + gradShare("Yale"), t14Grads = [...T14].reduce((t, n) => t + gradShare(n), 0);
+  const level = lv => sittingOn(TODAY, { level: lv, status: "active", party: "all", circuit: "all", gender: "all" }).map(s => s.j);
+  const hy = j => j.lawSchool === "Harvard" || j.lawSchool === "Yale", t14 = j => T14.has(j.lawSchool);
+  const clerkGrads = LS ? LS.federalClerkship + LS.stateClerkship : null;
+  const ladder = [
+    LS && { label: `All new lawyers (J.D. classes ${LS.years[0]}–${LS.years.at(-1)})`, hy: hyGrads, t14: t14Grads, clerk: clerkGrads, cls: "ref", n: LS.total },
+    { label: "State supreme court justices", js: ST.map(j => ({ lawSchool: j.lawSchool })), cls: "hl" },
+    { label: "District judges", js: level("District courts"), cls: "hl" },
+    { label: "Appeals court judges", js: level("Courts of appeals"), cls: "hl" },
+    { label: "Supreme Court justices", js: scotus, cls: "hl" }
+  ].filter(Boolean).map(r => r.js ? { ...r, n: r.js.length, hy: share(r.js.filter(j => j.lawSchool), hy), t14: share(r.js.filter(j => j.lawSchool), t14), clerk: r.js[0]?.careers ? share(r.js, j => j.careers.includes("Law clerk")) : null } : r);
+  const fedHy = share(fed, hy), fedT14 = share(fed, t14), fedClerk = share(fed, j => j.careers.includes("Law clerk"));
+  const times = (a, b) => b ? `${(a / b).toFixed(a / b >= 10 ? 0 : 1)} times` : "";
   $("view").innerHTML = `
     <p class="summary">How the bench compares with the profession it is drawn from and the public it serves. Gray bars are the country and the legal profession; dark bars are judges.</p>
+    ${LS ? `<h2 class="section-title">Pedigree: the bench against the bar</h2>
+    <p class="dek" style="margin-bottom:18px">Judges come overwhelmingly from a handful of law schools that train a small share of America's lawyers, and the higher the court, the narrower the funnel.</p>
+    <div class="tiles">
+      ${tile("Harvard or Yale law", fmtPct(fedHy), `of active federal judges, against ${fmtPct(hyGrads)} of new lawyers: ${times(fedHy, hyGrads)} their share`)}
+      ${tile("A top-14 law school", fmtPct(fedT14), `of active federal judges, against ${fmtPct(t14Grads)} of new lawyers`)}
+      ${tile("Former law clerks", fmtPct(fedClerk), `of active federal judges; ${fmtPct(clerkGrads)} of new lawyers start in a judicial clerkship`)}
+      ${tile("Supreme Court", `${scotus.filter(hy).length} of ${scotus.length}`, "justices with a Harvard or Yale law degree")}
+    </div>
+    <div class="grid2">
+      ${chart("k-ladder-hy", "The higher the court, the more Harvard and Yale", "Share with a Harvard or Yale law degree, from all new lawyers up to the Supreme Court. Active judges today.")}
+      ${chart("k-ladder-t14", "And the more top-14 schools", "Share from the 14 law schools that have long led the U.S. News rankings (Yale, Stanford, Harvard, Chicago, Columbia, NYU, Penn, Virginia, Michigan, Duke, Northwestern, Berkeley, Cornell, Georgetown).")}
+      ${chart("k-schools", "Law schools: judges against all new lawyers", `Each school's share of active federal judges (dark) and of all J.D. graduates, classes of ${LS.years[0]}–${LS.years.at(-1)} (gray). Schools are the 15 most common among judges.`, true)}
+      ${chart("k-clerk", "Judicial clerkships", "Judges who clerked for a judge early in their careers, against new lawyers whose first job is a clerkship (federal, state or local).")}
+    </div>
+    <p class="caveat">Law graduates by school come from the ABA's required disclosures, which start with the class of ${LS.years[0]}. Most sitting judges graduated between the 1970s and the 2000s. These schools' class sizes and the national total of new lawyers (roughly 35,000 to 46,000 a year) have changed only modestly since then, so their shares then were likely similar, but treat the comparison as an order of magnitude rather than an exact match. A judge's school is where they earned their first law degree.</p>` : ""}
     <div class="tiles">
       ${aba ? tile("Lawyers in the U.S.", fmtInt(aba.lawyers), `active, ${aba.year} (ABA)`) : ""}
       ${aba ? tile("Lawyers per active federal judge", fmtInt(aba.lawyers / fed.length), `${fmtInt(fed.length)} active judges`) : ""}
@@ -365,6 +394,7 @@ function compare() {
       ${pop ? `<li>Population: ${esc(pop.source)}. <a href="${esc(pop.url)}">Data file</a>.</li>` : ""}
       ${bls ? `<li>Workforce, lawyers and judges: ${esc(bls.source)}. <a href="${esc(bls.url)}">Table</a>.</li>` : ""}
       ${aba ? `<li>Lawyer population: ${esc(aba.source)}. <a href="${esc(aba.url)}">ABA Profile of the Legal Profession</a>.</li>` : ""}
+      ${LS ? `<li>Law graduates and clerkships: ${esc(LS.source)} (${fmtInt(LS.total)} graduates). <a href="${esc(LS.url)}">ABA required disclosures</a>.</li>` : ""}
       <li>Federal judges: Federal Judicial Center, Biographical Directory of Article III Federal Judges (${fmtInt(fedAll.length)} sitting today, ${fmtInt(fed.length)} of them active).</li>
       <li>State justices: Wikipedia and Wikidata, checked ${longDate(D.stateFetched)}.</li>
     </ul>`;
@@ -378,6 +408,17 @@ function compare() {
       { label: "Active federal judges", color: "var(--p-dem)", points: keys.map(k => ({ x: k, y: fedD[k] || 0 })) },
       { label: "State supreme court justices", color: "var(--p-whig)", points: keys.map(k => ({ x: k, y: stD[k] || 0 })) }
     ], { step: 5, yMin: 0, height: 240, xLabel: (x, long) => long ? (x === 18 ? "Ages 18–19" : x === 85 ? "Ages 85 and over" : `Ages ${x}–${x + 4}`) : String(x) });
+  }
+  if (LS) {
+    const tip = i => `<b>${esc(i.label)}</b><br>${fmtPct(i.value)}${i.n ? ` (of ${fmtInt(i.n)})` : ""}`;
+    hbars($("k-ladder-hy"), ladder.map(r => ({ label: r.label, value: r.hy, cls: r.cls, n: r.n })), { tipText: tip });
+    hbars($("k-ladder-t14"), ladder.map(r => ({ label: r.label, value: r.t14, cls: r.cls, n: r.n })), { tipText: tip });
+    const top = count(fed.map(j => j.lawSchool).filter(Boolean)).slice(0, 15);
+    hbars($("k-schools"), top.flatMap(([sch, n]) => [
+      { label: `${sch}: federal judges`, value: n / fed.length, cls: "hl", note: `${n} of ${fed.length} active judges` },
+      { label: `${sch}: all new lawyers`, value: gradShare(sch), cls: "ref pair-end", note: gradShare(sch) ? `judges from ${sch} are ${times(n / fed.length, gradShare(sch))} its share of graduates` : "" }
+    ]), { tipText: i => `<b>${esc(i.label)}</b><br>${fmtPct(i.value)}${i.note ? `<br>${esc(i.note)}` : ""}` });
+    hbars($("k-clerk"), ladder.filter(r => r.clerk != null).map(r => ({ label: r.label, value: r.clerk, cls: r.cls, n: r.n })), { tipText: tip, max: 1 });
   }
   for (const metric of ["women", "black", "hispanic", "asian", "white"]) {
     const items = groups.filter(g => g[metric] != null).map(g => ({ label: g.label, value: g[metric], cls: g.ref ? "ref" : "hl", lb: g.lowerBound }));
