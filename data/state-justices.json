@@ -1,5 +1,5 @@
 {
- "fetched": "2026-10-12",
+ "fetched": "2026-10-19",
  "problems": [],
  "justices": [
   {
@@ -2632,6 +2632,7 @@
    "sex": "F",
    "schools": [],
    "categories": [
+    "1983 births",
     "21st-century American judges",
     "21st-century American lawyers",
     "21st-century American women judges",
@@ -2953,15 +2954,15 @@
    "sex": "F",
    "schools": [
     {
+     "school": "Sweet Briar College",
+     "degree": null
+    },
+    {
      "school": "Therrell High School",
      "degree": null
     },
     {
      "school": "University of Georgia School of Law",
-     "degree": null
-    },
-    {
-     "school": "Sweet Briar College",
      "degree": null
     }
    ],
@@ -3301,7 +3302,7 @@
    "wiki": "Gregory_W._Moeller",
    "born": 1963,
    "start": 2019,
-   "termEnds": 2026,
+   "termEnds": 2032,
    "party": null,
    "appointer": "Butch Otter (R)",
    "appointerParty": "Republican",
@@ -3364,9 +3365,9 @@
    "name": "Cynthia Meyer",
    "chief": null,
    "wiki": "Cynthia_Meyer_(judge)",
-   "born": null,
+   "born": 1960,
    "start": 2023,
-   "termEnds": 2026,
+   "termEnds": 2032,
    "party": null,
    "appointer": "Brad Little (R)",
    "appointerParty": "Republican",
@@ -3754,15 +3755,15 @@
    "sex": "M",
    "schools": [
     {
+     "school": "Indiana University Maurer School of Law",
+     "degree": null
+    },
+    {
      "school": "Crown Point High School",
      "degree": null
     },
     {
      "school": "Indiana University Bloomington",
-     "degree": null
-    },
-    {
-     "school": "Indiana University Maurer School of Law",
      "degree": null
     }
    ],
@@ -4735,7 +4736,7 @@
    "wiki": "Jay_McCallum",
    "born": 1960,
    "start": 2020,
-   "termEnds": 2026,
+   "termEnds": 2036,
    "party": "Republican",
    "appointer": null,
    "appointerParty": null,
