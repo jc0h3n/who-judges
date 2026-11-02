@@ -1,5 +1,5 @@
 {
- "fetched": "2026-10-26",
+ "fetched": "2026-11-02",
  "problems": [],
  "justices": [
   {
@@ -1901,6 +1901,48 @@
    ]
   },
   {
+   "st": "CT",
+   "court": "Connecticut Supreme Court",
+   "name": "Melanie L. Cradle",
+   "chief": null,
+   "wiki": "Melanie_L._Cradle",
+   "born": 1970,
+   "start": 2026,
+   "termEnds": 2034,
+   "party": null,
+   "appointer": "Ned Lamont (D)",
+   "appointerParty": "Democratic",
+   "electedParty": null,
+   "lawSchool": "Seton Hall",
+   "wikidata": "Q97573248",
+   "sex": "F",
+   "schools": [],
+   "categories": [
+    "1970s births",
+    "20th-century African-American lawyers",
+    "20th-century American lawyers",
+    "21st-century African-American lawyers",
+    "21st-century American judges",
+    "21st-century American lawyers",
+    "Adelphi University alumni",
+    "African-American judges",
+    "African-American women lawyers",
+    "American women lawyers",
+    "Connecticut lawyers",
+    "Connecticut state court judge stubs",
+    "Connecticut state court judges",
+    "Judges of the Connecticut Appellate Court",
+    "Judges of the Connecticut Superior Court",
+    "Justices of the Connecticut Supreme Court",
+    "Living people",
+    "People from Durham, Connecticut",
+    "People from Middlefield, Connecticut",
+    "Quinnipiac University faculty",
+    "Seton Hall University School of Law alumni",
+    "Superior court judges in the United States"
+   ]
+  },
+  {
    "st": "DE",
    "court": "Delaware Supreme Court",
    "name": "Collins J. Seitz Jr.",
@@ -3254,47 +3296,6 @@
   {
    "st": "ID",
    "court": "Idaho Supreme Court",
-   "name": "G. Richard Bevan",
-   "chief": null,
-   "wiki": "G._Richard_Bevan",
-   "born": 1959,
-   "start": 2017,
-   "termEnds": 2030,
-   "party": null,
-   "appointer": "Butch Otter (R)",
-   "appointerParty": "Republican",
-   "electedParty": null,
-   "lawSchool": "BYU",
-   "wikidata": "Q41929312",
-   "sex": "M",
-   "schools": [
-    {
-     "school": "Brigham Young University",
-     "degree": null
-    },
-    {
-     "school": "J. Reuben Clark Law School",
-     "degree": null
-    },
-    {
-     "school": "Twin Falls High School",
-     "degree": null
-    }
-   ],
-   "categories": [
-    "1959 births",
-    "21st-century American judges",
-    "Brigham Young University alumni",
-    "Chief justices of the Idaho Supreme Court",
-    "J. Reuben Clark Law School alumni",
-    "Justices of the Idaho Supreme Court",
-    "Living people",
-    "People from Twin Falls, Idaho"
-   ]
-  },
-  {
-   "st": "ID",
-   "court": "Idaho Supreme Court",
    "name": "Gregory W. Moeller",
    "chief": null,
    "wiki": "Gregory_W._Moeller",
@@ -3388,6 +3389,25 @@
     "North Idaho College faculty",
     "S.J. Quinney College of Law alumni"
    ]
+  },
+  {
+   "st": "ID",
+   "court": "Idaho Supreme Court",
+   "name": "Jason Scott",
+   "chief": null,
+   "wiki": null,
+   "born": null,
+   "start": 2026,
+   "termEnds": 2030,
+   "party": null,
+   "appointer": "Brad Little (R)",
+   "appointerParty": "Republican",
+   "electedParty": null,
+   "lawSchool": "Duke",
+   "wikidata": null,
+   "sex": null,
+   "schools": [],
+   "categories": []
   },
   {
    "st": "IL",
@@ -5730,6 +5750,7 @@
     "21st-century American judges",
     "21st-century American lawyers",
     "21st-century American women judges",
+    "Cavanagh family",
     "Chief justices of the Michigan Supreme Court",
     "Justices of the Michigan Supreme Court",
     "Lawyers from Detroit",

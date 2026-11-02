@@ -97,15 +97,15 @@
    "hispanic": 0.131
   }
  },
- "fetched": "2026-10-26",
+ "fetched": "2026-11-02",
  "education": {
-  "source": "U.S. Census Bureau, Current Population Survey, Educational Attainment in the United States: 2024, table 1-1 (people 25 and over)",
-  "url": "https://www2.census.gov/programs-surveys/demo/tables/educational-attainment/2024/cps-detailed-tables/attain01_2024_1.xlsx",
-  "year": 2024,
-  "bachelorsOrMore": 0.3868320278503046,
-  "graduate": 0.14940818102697997,
-  "professional": 0.01397302001740644,
-  "doctoral": 0.022249782419495212
+  "source": "U.S. Census Bureau, Current Population Survey, Educational Attainment in the United States: 2025, table 1-1 (people 25 and over)",
+  "url": "https://www2.census.gov/programs-surveys/demo/tables/educational-attainment/2025/cps-detailed-tables/attain01_2025_1.xlsx",
+  "year": 2025,
+  "bachelorsOrMore": 0.39353846153846156,
+  "graduate": 0.1525128205128205,
+  "professional": 0.014961538461538462,
+  "doctoral": 0.024047008547008548
  },
  "veterans": {
   "source": "U.S. Bureau of Labor Statistics, Current Population Survey, 2025 annual averages (series LNU00049526 and LNU00049601)",
