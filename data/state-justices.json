@@ -1,5 +1,5 @@
 {
- "fetched": "2026-11-09",
+ "fetched": "2026-11-16",
  "problems": [],
  "justices": [
   {
@@ -285,9 +285,11 @@
     "Baptists from Alabama",
     "Duke University alumni",
     "Harvard Law School alumni",
+    "Judges of the United States District Court for the Northern District of Alabama",
     "Justices of the Supreme Court of Alabama",
     "Living people",
-    "United States Air Force officers"
+    "United States Air Force officers",
+    "United States district court judges appointed by Donald Trump"
    ]
   },
   {
@@ -2765,7 +2767,7 @@
    "wiki": "Sarah_Hawkins_Warren",
    "born": 1981,
    "start": 2018,
-   "termEnds": 2026,
+   "termEnds": 2032,
    "party": null,
    "appointer": "Nathan Deal (R)",
    "appointerParty": "Republican",
@@ -2810,7 +2812,7 @@
    "wiki": "Charlie_Bethel",
    "born": 1976,
    "start": 2018,
-   "termEnds": 2026,
+   "termEnds": 2032,
    "party": null,
    "appointer": "Nathan Deal (R)",
    "appointerParty": "Republican",
@@ -3076,9 +3078,9 @@
    "name": "Benjamin Land",
    "chief": null,
    "wiki": "Benjamin_Land",
-   "born": null,
+   "born": 1967,
    "start": 2025,
-   "termEnds": 2026,
+   "termEnds": 2032,
    "party": null,
    "appointer": "Brian Kemp (R)",
    "appointerParty": "Republican",
@@ -9255,7 +9257,6 @@
     "Justices of the Supreme Court of Ohio",
     "Living people",
     "Ohio Republicans",
-    "Ohio lawyers",
     "Ohio state court judges",
     "Politicians from Cincinnati",
     "St. Xavier High School (Ohio) alumni",
@@ -9385,6 +9386,48 @@
     "People from Tishomingo, Oklahoma",
     "Politicians from Ada, Oklahoma",
     "University of Oklahoma College of Law alumni"
+   ]
+  },
+  {
+   "st": "OK",
+   "court": "Oklahoma Supreme Court",
+   "name": "Dana Kuehn, Vice",
+   "chief": true,
+   "wiki": "Dana_Kuehn",
+   "born": 1971,
+   "start": 2021,
+   "termEnds": 2032,
+   "party": null,
+   "appointer": "Kevin Stitt (R)",
+   "appointerParty": "Republican",
+   "electedParty": null,
+   "lawSchool": "Tulsa",
+   "wikidata": "Q105672926",
+   "sex": "F",
+   "schools": [
+    {
+     "school": "Oklahoma State University",
+     "degree": null
+    }
+   ],
+   "categories": [
+    "1971 births",
+    "20th-century American lawyers",
+    "20th-century American women lawyers",
+    "21st-century American women judges",
+    "21st-century Oklahoma state court judges",
+    "County judges in Oklahoma",
+    "Judges of the Oklahoma Court of Criminal Appeals",
+    "Justices of the Oklahoma Supreme Court",
+    "Lawyers from Tulsa, Oklahoma",
+    "Living people",
+    "Oklahoma Republicans",
+    "Oklahoma State University alumni",
+    "Oklahoma lawyers",
+    "Presbyterians from Oklahoma",
+    "University of Tulsa College of Law alumni",
+    "University of Tulsa College of Law faculty",
+    "Women in Oklahoma politics"
    ]
   },
   {
@@ -9633,48 +9676,6 @@
     "Oklahoma State University alumni",
     "People from Pawhuska, Oklahoma",
     "University of Oklahoma College of Law alumni"
-   ]
-  },
-  {
-   "st": "OK",
-   "court": "Oklahoma Supreme Court",
-   "name": "Dana Kuehn, Vice",
-   "chief": true,
-   "wiki": "Dana_Kuehn",
-   "born": 1971,
-   "start": 2021,
-   "termEnds": 2032,
-   "party": null,
-   "appointer": "Kevin Stitt (R)",
-   "appointerParty": "Republican",
-   "electedParty": null,
-   "lawSchool": "Tulsa",
-   "wikidata": "Q105672926",
-   "sex": "F",
-   "schools": [
-    {
-     "school": "Oklahoma State University",
-     "degree": null
-    }
-   ],
-   "categories": [
-    "1971 births",
-    "20th-century American lawyers",
-    "20th-century American women lawyers",
-    "21st-century American women judges",
-    "21st-century Oklahoma state court judges",
-    "County judges in Oklahoma",
-    "Judges of the Oklahoma Court of Criminal Appeals",
-    "Justices of the Oklahoma Supreme Court",
-    "Lawyers from Tulsa, Oklahoma",
-    "Living people",
-    "Oklahoma Republicans",
-    "Oklahoma State University alumni",
-    "Oklahoma lawyers",
-    "Presbyterians from Oklahoma",
-    "University of Tulsa College of Law alumni",
-    "University of Tulsa College of Law faculty",
-    "Women in Oklahoma politics"
    ]
   },
   {
