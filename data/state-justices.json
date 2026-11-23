@@ -1,5 +1,5 @@
 {
- "fetched": "2026-11-16",
+ "fetched": "2026-11-23",
  "problems": [],
  "justices": [
   {
@@ -1000,8 +1000,7 @@
     "Candidates in the 2024 United States elections",
     "Justices of the Arkansas Supreme Court",
     "Living people",
-    "University of Arkansas School of Law alumni",
-    "University of Arkansas alumni"
+    "University of Arkansas School of Law alumni"
    ]
   },
   {
@@ -1012,7 +1011,7 @@
    "wiki": "J._Cody_Hiland",
    "born": 1972,
    "start": 2023,
-   "termEnds": 2026,
+   "termEnds": 2034,
    "party": null,
    "appointer": "Sarah Huckabee Sanders (R)",
    "appointerParty": "Republican",
@@ -1052,7 +1051,7 @@
    "wiki": "Nicholas_Bronni",
    "born": 1982,
    "start": 2025,
-   "termEnds": 2026,
+   "termEnds": 2034,
    "party": null,
    "appointer": "Sarah Huckabee Sanders (R)",
    "appointerParty": "Republican",
@@ -2659,9 +2658,9 @@
   {
    "st": "FL",
    "court": "Supreme Court of Florida",
-   "name": "Meredith Sasso",
+   "name": "Meredith Barrios",
    "chief": null,
-   "wiki": "Meredith_Sasso",
+   "wiki": "Meredith_Barrios",
    "born": 1983,
    "start": 2023,
    "termEnds": 2031,
@@ -3102,12 +3101,12 @@
   {
    "st": "HI",
    "court": "Supreme Court of Hawaii",
-   "name": "Vladimir Devens",
+   "name": "Vladimir Devens, Chief Justice since May 5, 2026",
    "chief": true,
    "wiki": "Vladimir_Devens",
    "born": 1962,
    "start": 2024,
-   "termEnds": 2036,
+   "termEnds": null,
    "party": null,
    "appointer": "Josh Green (D)",
    "appointerParty": "Democratic",
@@ -3137,7 +3136,7 @@
    "wiki": "Sabrina_McKenna",
    "born": 1957,
    "start": 2011,
-   "termEnds": 2031,
+   "termEnds": null,
    "party": null,
    "appointer": "Neil Abercrombie (D)",
    "appointerParty": "Democratic",
@@ -3184,7 +3183,7 @@
    "wiki": "Todd_W._Eddins",
    "born": 1964,
    "start": 2020,
-   "termEnds": 2030,
+   "termEnds": null,
    "party": null,
    "appointer": "David Ige (D)",
    "appointerParty": "Democratic",
@@ -3215,7 +3214,7 @@
    "wiki": "Lisa_M._Ginoza",
    "born": 1964,
    "start": 2024,
-   "termEnds": 2034,
+   "termEnds": null,
    "party": null,
    "appointer": "Josh Green (D)",
    "appointerParty": "Democratic",
@@ -3775,15 +3774,15 @@
    "sex": "M",
    "schools": [
     {
+     "school": "Indiana University Maurer School of Law",
+     "degree": null
+    },
+    {
      "school": "Crown Point High School",
      "degree": null
     },
     {
      "school": "Indiana University Bloomington",
-     "degree": null
-    },
-    {
-     "school": "Indiana University Maurer School of Law",
      "degree": null
     }
    ],
@@ -4859,7 +4858,7 @@
     "Justices of the Louisiana Supreme Court",
     "Living people",
     "Louisiana State University alumni",
-    "McKinley Senior High School alumni",
+    "McKinley High School (Louisiana) alumni",
     "Southern University Law Center alumni",
     "United States judge stubs"
    ]
@@ -4903,7 +4902,7 @@
    "wiki": "Billy_Burris",
    "born": 1981,
    "start": 2026,
-   "termEnds": 2028,
+   "termEnds": 2036,
    "party": "Republican",
    "appointer": null,
    "appointerParty": null,
@@ -9170,7 +9169,7 @@
    "wiki": "Jennifer_Brunner",
    "born": 1957,
    "start": 2021,
-   "termEnds": 2032,
+   "termEnds": 2033,
    "party": "Democratic",
    "appointer": null,
    "appointerParty": null,
@@ -9778,7 +9777,7 @@
    "wiki": null,
    "born": 1958,
    "start": 2015,
-   "termEnds": 2026,
+   "termEnds": 2032,
    "party": null,
    "appointer": "Mary Fallin (R)",
    "appointerParty": "Republican",
@@ -11390,6 +11389,7 @@
     }
    ],
    "categories": [
+    "1980 births",
     "Edina High School alumni",
     "Harvard College alumni",
     "Justices of the Supreme Court of Texas",
@@ -11699,7 +11699,7 @@
    "wiki": "Jill_Pohlman",
    "born": null,
    "start": 2022,
-   "termEnds": 2027,
+   "termEnds": 2037,
    "party": null,
    "appointer": "Spencer Cox (R)",
    "appointerParty": "Republican",
@@ -12378,6 +12378,7 @@
     "1965 births",
     "21st-century American judges",
     "21st-century American women judges",
+    "21st-century Washington (state) state court judges",
     "American Presbyterians",
     "American women academics",
     "Chief justices of the Washington Supreme Court",
@@ -12418,8 +12419,9 @@
    ],
    "categories": [
     "1951 births",
-    "20th-century American judges",
+    "20th-century Washington (state) state court judges",
     "21st-century American judges",
+    "21st-century Washington (state) state court judges",
     "Justices of the Washington Supreme Court",
     "Living people",
     "People from Gig Harbor, Washington",
@@ -12427,7 +12429,6 @@
     "Seattle University School of Law alumni",
     "University of Puget Sound alumni",
     "University of Washington alumni",
-    "Washington (state) state court judges",
     "Washington state court judge stubs"
    ]
   },
@@ -12458,6 +12459,7 @@
     "20th-century American Jews",
     "21st-century American Jews",
     "21st-century American judges",
+    "21st-century Washington (state) state court judges",
     "American judges of Mexican descent",
     "American lawyers of Mexican descent",
     "Assistant United States attorneys",
@@ -12504,6 +12506,7 @@
     "21st-century American Jews",
     "21st-century American judges",
     "21st-century American women judges",
+    "21st-century Washington (state) state court judges",
     "Justices of the Washington Supreme Court",
     "Living people",
     "USC Gould School of Law alumni",
@@ -12537,10 +12540,10 @@
     "1968 births",
     "21st-century American Jews",
     "21st-century American judges",
-    "21st-century American state court judges",
     "21st-century American women judges",
     "21st-century Native American politicians",
     "21st-century Native American women",
+    "21st-century Washington (state) state court judges",
     "American lawyers",
     "American people of Australian descent",
     "American people of Laguna Pueblo descent",
@@ -12587,6 +12590,7 @@
     "21st-century Trinidad and Tobago LGBTQ people",
     "21st-century Trinidad and Tobago lawyers",
     "21st-century Trinidad and Tobago women",
+    "21st-century Washington (state) state court judges",
     "African-American LGBTQ people",
     "African-American judges",
     "American LGBTQ lawyers",
@@ -12601,8 +12605,7 @@
     "Public defenders",
     "Seattle University School of Law alumni",
     "Superior court judges in the United States",
-    "Washington (state) lawyers",
-    "Washington (state) state court judges"
+    "Washington (state) lawyers"
    ]
   },
   {
@@ -12627,6 +12630,7 @@
     "20th-century American lawyers",
     "21st-century American judges",
     "21st-century American lawyers",
+    "21st-century Washington (state) state court judges",
     "American judges of Mexican descent",
     "American jurists of Japanese descent",
     "Georgetown University Law Center alumni",
@@ -12656,8 +12660,8 @@
    "schools": [],
    "categories": [
     "1982 births",
-    "21st-century American state court judges",
     "21st-century American women judges",
+    "21st-century Washington (state) state court judges",
     "Justices of the Washington Supreme Court",
     "Living people",
     "People from Spokane, Washington",
@@ -12683,8 +12687,7 @@
    "schools": [],
    "categories": [
     "1972 births",
-    "21st-century American judges",
-    "21st-century American state court judges",
+    "21st-century Washington (state) state court judges",
     "Alumni of Magdalen College, Oxford",
     "Alumni of the London School of Economics",
     "Claremont McKenna College alumni",
@@ -13296,7 +13299,7 @@
    "wiki": "Robert_Jarosh",
    "born": 1971,
    "start": 2024,
-   "termEnds": 2027,
+   "termEnds": 2035,
    "party": null,
    "appointer": "Mark Gordon (R)",
    "appointerParty": "Republican",
@@ -13327,7 +13330,7 @@
    "wiki": "Bridget_Hill_(politician)",
    "born": 1974,
    "start": 2025,
-   "termEnds": 2028,
+   "termEnds": 2029,
    "party": null,
    "appointer": "Mark Gordon (R)",
    "appointerParty": "Republican",
